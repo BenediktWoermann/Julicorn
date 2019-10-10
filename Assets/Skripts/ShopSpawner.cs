@@ -25,8 +25,8 @@ public class ShopSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cloudOffset = -1.4f;
-        priceOffset = 1.6f;
+        cloudOffset = -.6f;
+        priceOffset = 1f;
         generalOffset = -3f;
         height = Camera.main.orthographicSize * 2f;
         print(height);
@@ -38,21 +38,23 @@ public class ShopSpawner : MonoBehaviour
     {
         // set skins clouds and pricetags to an independent position to the canvas
         RectTransform canpos = GameObject.Find("Canvas").GetComponent<RectTransform>();
-        for(int i = 0; i<skins.Count; i++) {
+        // get height of first skin
+        float skinHeight = 0;
+        if (skins.Count > 0)
+        {
+            skinHeight = skins[0].GetComponent<Renderer>().bounds.extents.y * 2;
+        }
+        for (int i = 0; i<skins.Count; i++) {
             Vector3 pos = skins[i].transform.position;
             pos.y = generalOffset + height*2;
             skins[i].transform.position = pos;
-        }
-        for (int i = 0; i < clouds.Count; i++)
-        {
-            Vector3 pos = clouds[i].transform.position;
-            pos.y = generalOffset + cloudOffset + height*2;
+       
+            pos = clouds[i].transform.position;
+            pos.y = generalOffset + cloudOffset * skinHeight + height*2;
             clouds[i].transform.position = pos;
-        }
-        for (int i = 0; i < pricetags.Count; i++)
-        {
-            Vector3 pos = pricetags[i].transform.position;
-            pos.y = generalOffset + priceOffset + height*2;
+       
+            pos = pricetags[i].transform.position;
+            pos.y = generalOffset + priceOffset * skinHeight + height*2;
             pricetags[i].transform.position = pos;
         }
     }
@@ -68,21 +70,28 @@ public class ShopSpawner : MonoBehaviour
             // Spawn every skin with own cloud in canvas
             Vector3 pos = new Vector3
             {
-                y = height * 2,
-                x = width * (i - 1) / (skinsPre.Length + 1)
+                y = Screen.height * 2 + generalOffset,
+                x = Screen.width * (i + 1) / (skinsPre.Length + 1)
             };
+            pos = Camera.main.ScreenToWorldPoint(pos);
+            pos.z = 0;
             GameObject skin = Instantiate(skinsPre[i], pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
             skin.transform.localScale = can.referencePixelsPerUnit * skin.transform.localScale;
+            skins.Add(skin);
+            float skinHeight = 0;
+            if (skins.Count > 0)
+            {
+                skinHeight = skins[0].GetComponent<Renderer>().bounds.extents.y * 2;
+            }
             //spawn pricetags
-            pos.y += priceOffset;
+            pos.y += skinHeight * priceOffset;
             GameObject pricetag = Instantiate(txtPrefab, pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
             pricetag.transform.localScale = can.referencePixelsPerUnit * pricetag.transform.localScale /100;
             pricetag.GetComponent<Text>().text = DataManagement.purchasedSkins[i] ? "purchased!" : "Buy for "+Purchasing.prices[i].ToString();
             //spawn clouds
-            pos.y -= cloudOffset;
+            pos.y += skinHeight * cloudOffset;
             GameObject cloud = Instantiate(cloudPre, pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
             cloud.transform.localScale = can.referencePixelsPerUnit * cloud.transform.localScale;
-            skins.Add(skin);
             clouds.Add(cloud);
             pricetags.Add(pricetag);
         }

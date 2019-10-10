@@ -21,9 +21,5 @@ public class BG_Scaler : MonoBehaviour
         transform.localScale = new Vector3(scale*width, scale*height, 0);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

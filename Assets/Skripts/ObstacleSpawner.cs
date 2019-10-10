@@ -39,14 +39,20 @@ public class ObstacleSpawner : MonoBehaviour
             }
             if ((frames - repetitionTimeMax / 2) % repetitionTimeMax == 0)
             {
-                AddObstacle(1);
+                if (GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite.name.Equals("GoldDonkey_0"))
+                {
+                    AddObstacle(2);
+                }
+                else {
+                    AddObstacle(1);
+                }
             }
             frames++;
         }
     }
 
 
-    // index 0 for a random tree; index 1 for a coin
+    // index 0 for a random tree; index 1 for a coin; index 2 for straw
     public void AddObstacle(int index) {
         if (index == 0)
         {
@@ -81,5 +87,16 @@ public class ObstacleSpawner : MonoBehaviour
                 return;
             }
         }
+        if (index == 2)
+        {
+            // Spawn Straw
+            if(Random.value > .3) {
+                float ypos = Random.value * height - height / 2;
+                GameObject go = Instantiate(obstacles[5], transform.position, Quaternion.identity);
+                go.transform.position = new Vector3(width * .6f, ypos, 0);
+                coins.Add(go);
+                return;
+            }
+        } 
     }
 }

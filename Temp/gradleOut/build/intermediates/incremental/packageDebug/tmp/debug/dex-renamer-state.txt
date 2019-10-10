@@ -1,4 +1,0 @@
-#Thu Oct 10 19:42:12 CEST 2019
-base.0=/Users/bw/Documents/Coding/Unity/Julicorn/Temp/gradleOut/build/intermediates/transforms/dexMerger/debug/0
-path.0=classes.dex
-renamed.0=classes.dex

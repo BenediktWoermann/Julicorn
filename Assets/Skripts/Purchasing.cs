@@ -124,10 +124,13 @@ public class Purchasing : MonoBehaviour
         Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         Vector3 pos = new Vector3
         {
-            x = Screen.width * (skinNr - 1) / 4,
-            y = -Screen.height / 4,
+            x = Screen.width * (skinNr + 1) / 4,
+            y = Screen.height / 5,
             z = 0
         };
+        buybtn.transform.position = Camera.main.ScreenToWorldPoint(pos);
+        pos = buybtn.GetComponent<RectTransform>().localPosition;
+        pos.z = 0;
         buybtn.GetComponent<RectTransform>().localPosition = pos;
     } 
 }
