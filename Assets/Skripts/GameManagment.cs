@@ -15,6 +15,10 @@ public class GameManagment : MonoBehaviour
     private float ShopDespawnTimer;
     private bool ShopDespawn;
 
+    // Animators
+    Animator ani;
+    Animator aniUI;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +28,10 @@ public class GameManagment : MonoBehaviour
         shop.onClick.AddListener(StartShop);
         startGame.onClick.AddListener(StartGame);
         playerGravityScale = GameObject.Find("Player").GetComponent<Rigidbody2D>().gravityScale;
+
+        // get animators
+        aniUI = GameObject.Find("Canvas").GetComponent<Animator>();
+        ani = GameObject.Find("Main Camera").GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -66,10 +74,11 @@ public class GameManagment : MonoBehaviour
         GameObject.Find("Player").GetComponent<Player_Move>().gameStoped = false;
         GameObject.Find("Player").transform.position = new Vector3(-6.5f, 1, 0);
         // Animation to the ground
-        GameObject.Find("Main Camera").GetComponent<Animator>().ResetTrigger("SwipeUp");
-        GameObject.Find("Main Camera").GetComponent<Animator>().SetTrigger("SwipeDown");
-        GameObject.Find("Canvas").GetComponent<Animator>().ResetTrigger("SwipeUIIn");
-        GameObject.Find("Canvas").GetComponent<Animator>().SetTrigger("SwipeUIOut");
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+        {
+            ani.Play("SwipeCamDown");
+            aniUI.Play("SwipeUIOut");
+        }
         //SceneChanger sc = GameObject.Find("Fader").GetComponent<SceneChanger>();
         //sc.FadeToScene(1);
     }
@@ -81,10 +90,11 @@ public class GameManagment : MonoBehaviour
         // Do animation after waiting endingDuration
         if (!ended && frames >= endingDuration)
         {
-            GameObject.Find("Main Camera").GetComponent<Animator>().ResetTrigger("SwipeDown");
-            GameObject.Find("Main Camera").GetComponent<Animator>().SetTrigger("SwipeUp");
-            GameObject.Find("Canvas").GetComponent<Animator>().ResetTrigger("SwipeUIOut");
-            GameObject.Find("Canvas").GetComponent<Animator>().SetTrigger("SwipeUIIn");
+            if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamDown") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("UIOut"))
+            {
+                ani.Play("SwipeCamUp");
+                aniUI.Play("SwipeUIIn");
+            }
             ended = true;
         }
 
@@ -163,17 +173,19 @@ public class GameManagment : MonoBehaviour
         // Spawn all the shop items
         GameObject.Find("ShopSpawner").GetComponent<ShopSpawner>().Spawn();
         // Animation to the ground
-        Animator ani = GameObject.Find("Main Camera").GetComponent<Animator>();
-        Animator aniUI = GameObject.Find("Canvas").GetComponent<Animator>();
-        aniUI.Play("SwipeUIOutShop");
-        ani.Play("CameraUpShop");
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+        {
+            aniUI.Play("SwipeUIOutShop");
+            ani.Play("SwipeCamUpShop");
+        }
     }
 
     public void StopShop() {
         // Animation back up
-        GameObject.Find("Main Camera").GetComponent<Animator>().ResetTrigger("SwipeDown");
-        GameObject.Find("Main Camera").GetComponent<Animator>().SetTrigger("SwipeUp");
-        GameObject.Find("Canvas").GetComponent<Animator>().ResetTrigger("SwipeUIOut");
-        GameObject.Find("Canvas").GetComponent<Animator>().SetTrigger("SwipeUIIn");
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("UIOutShop"))
+        {
+            aniUI.Play("SwipeUIInShop");
+            ani.Play("SwipeCamDownShop");
+        }
     }
 }

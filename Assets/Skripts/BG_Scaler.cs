@@ -17,7 +17,7 @@ public class BG_Scaler : MonoBehaviour
         widhei = new Vector2(tex.width, tex.height);
         float height = Camera.main.orthographicSize * 2f;
         float width = height / Screen.height * Screen.width;
-        height = width / widhei.x * widhei.y;
+        //height = width / widhei.x * widhei.y;
         transform.localScale = new Vector3(scale*width, scale*height, 0);
     }
 
