@@ -193,7 +193,7 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 1f0c04e0019ca3c9a391a9b30ebd8e70
+      Hash: 18c3e04b6b868b273be5d2c663bbaf61
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShopSpawner
@@ -697,7 +697,7 @@ ScriptsOnlyBuild:
     className: ControlPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: fef92c0e295980832c1601828b3b5250
+      Hash: b0bff71f75bea38dfb4cc2fde767ae8b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Purchasing
@@ -1154,4 +1154,4 @@ ScriptsOnlyBuild:
   platform: 13
   scenePathNames:
   - Assets/Scenes/InGame.unity
-  playerPath: /Users/bw/Documents/UnityJuliBuild.apk
+  playerPath: /Users/bw/Documents/Coding/Unity/Julicorn/Executables/UnityJuliBuild.apk
