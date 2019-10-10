@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Thu Oct 10 14:13:20 CEST 2019
+#Thu Oct 10 19:42:12 CEST 2019
 210.set=ASSET
 2.path=bin/Data/Managed/UnityEngine.UIModule.dll.mdb
 14.set=ASSET
