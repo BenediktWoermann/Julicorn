@@ -65,9 +65,9 @@ public class ObstacleSpawner : MonoBehaviour
             float upperGateLimit = Random.Range(gap * 100, 10000) / 10000;
             GameObject go = Instantiate(obstacles[treenumber], transform.position, Quaternion.identity);
             float x = width * .6f;
-            go.transform.position = new Vector3(x, height * upperGateLimit, 0);
+            go.transform.position = new Vector3(x, height * upperGateLimit - 2f, 0);
             GameObject go2 = Instantiate(obstacles[0], transform.position, Quaternion.identity);
-            go2.transform.position = new Vector3(x, height * upperGateLimit - gap / 100 * height - go2.GetComponent<SpriteRenderer>().bounds.size.y, 0);
+            go2.transform.position = new Vector3(x, height * upperGateLimit - gap / 100 * height - go2.GetComponent<SpriteRenderer>().bounds.size.y - 2f, 0);
             tubes.Add(go);
             tubes.Add(go2);
 
@@ -82,7 +82,7 @@ public class ObstacleSpawner : MonoBehaviour
             if (Random.value > .5) { 
                 float ypos = Random.value * height - height/2;
                 GameObject go = Instantiate(obstacles[4], transform.position, Quaternion.identity);
-                go.transform.position = new Vector3(width * .6f, ypos, 0);
+                go.transform.position = new Vector3(width * .6f, ypos - 2, 0);
                 coins.Add(go);
                 return;
             }

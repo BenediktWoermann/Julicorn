@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{615E248D-9596-1207-D7B9-59A8746FCF17}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Skripts/Save_Load.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Skripts/GameManagment.cs">
     <Files>
-      <File FileName="Assets/Skripts/ShopSpawner.cs" Line="77" Column="23" />
+      <File FileName="Assets/Skripts/ShopSpawner.cs" Line="40" Column="6" />
       <File FileName="Assets/Skripts/Purchasing.cs" />
       <File FileName="Assets/Skripts/DataManagement.cs" />
-      <File FileName="Assets/Skripts/GameManagment.cs" />
+      <File FileName="Assets/Skripts/GameManagment.cs" Line="98" Column="61" />
       <File FileName="Assets/Skripts/BG_Scaler.cs" />
       <File FileName="Assets/Skripts/ObstacleSpawner.cs" />
       <File FileName="Assets/Skripts/SkinSpawner.cs" />
@@ -16,7 +16,7 @@
           <Node name="Julicorn" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Skripts" expanded="True">
-                <Node name="Save_Load.cs" selected="True" />
+                <Node name="GameManagment.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -26,7 +26,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="ad11108c-15ea-47e3-af72-c5be284db133" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7b1c686c-1fa3-4c62-8692-7acdd404fbb2" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

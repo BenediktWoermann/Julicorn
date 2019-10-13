@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManagment : MonoBehaviour
 {
+    public GameObject arrowPrefab;
+    private GameObject arrow;
+
     public Text highscoreTxt;
     public Text coinsTxt;
     public Button startGame, shop;
@@ -37,6 +40,19 @@ public class GameManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // check if canvas is up in the shop, if so spawn arrow if not spawned already
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp") && !arrow)
+        {
+            arrow = Instantiate(arrowPrefab, GameObject.Find("MenuCanvas").transform);
+            Button arrowbtn = arrow.GetComponent<Button>();
+            GameManagment gm = GameObject.Find("GameManager").GetComponent<GameManagment>();
+            arrowbtn.onClick.AddListener(gm.StopShop);
+            print(arrowbtn.onClick.ToString());
+        }
+        // if arrowDestroy animation ended, destroy arrow
+        if(arrow && arrow.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ArrowEnd")) {
+            Destroy(arrow);
+        }
         if (ShopDespawn) { 
         
         }
@@ -65,19 +81,18 @@ public class GameManagment : MonoBehaviour
         ClearWood();
         // Set check variables to false and reset player and score
         GameObject.Find("Cloud").GetComponent<ObstacleMover>().speed = 0;
-        GameObject.Find("Cloud").GetComponent<ObstacleMover>().SetPos(new Vector3(-6.78f, -0.32f));
+        GameObject.Find("Cloud").GetComponent<ObstacleMover>().SetPos(new Vector3(-6.78f, -2.32f));
         GameObject.Find("Score").GetComponent<ScoreUpdater>().Reset();
         endingGame = false;
         ended = false;
         frames = 0;
         GameObject.Find("Player").GetComponent<Player_Move>().Setactive();
         GameObject.Find("Player").GetComponent<Player_Move>().gameStoped = false;
-        GameObject.Find("Player").transform.position = new Vector3(-6.5f, 1, 0);
+        GameObject.Find("Player").transform.position = new Vector3(-6.7f, -1, 0);
         // Animation to the ground
-        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default"))
         {
             ani.Play("SwipeCamDown");
-            aniUI.Play("SwipeUIOut");
         }
         //SceneChanger sc = GameObject.Find("Fader").GetComponent<SceneChanger>();
         //sc.FadeToScene(1);
@@ -86,14 +101,12 @@ public class GameManagment : MonoBehaviour
 
     public void StopGame()
     {
-
         // Do animation after waiting endingDuration
         if (!ended && frames >= endingDuration)
         {
-            if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamDown") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("UIOut"))
+            if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamDown"))
             {
                 ani.Play("SwipeCamUp");
-                aniUI.Play("SwipeUIIn");
             }
             ended = true;
         }
@@ -162,29 +175,30 @@ public class GameManagment : MonoBehaviour
     public void StartShop() {
         // Despawn old shop
         GameObject.Find("ShopSpawner").GetComponent<ShopSpawner>().Despawn();
-        // Delete all coins; saw trees down (same part as in "StartGame")
-        List<GameObject> toDelete = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().coins;
-        for (int i = toDelete.Count; i > 0; i--)
-        {
-            Destroy(toDelete[i - 1]);
-        }
-        ClearWood();
+        //// Delete all coins; saw trees down (same part as in "StartGame")
+        //List<GameObject> toDelete = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().coins;
+        //for (int i = toDelete.Count; i > 0; i--)
+        //{
+        //    Destroy(toDelete[i - 1]);
+        //}
+        //ClearWood();
 
         // Spawn all the shop items
         GameObject.Find("ShopSpawner").GetComponent<ShopSpawner>().Spawn();
         // Animation to the ground
-        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("Default"))
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("Default"))
         {
-            aniUI.Play("SwipeUIOutShop");
             ani.Play("SwipeCamUpShop");
         }
     }
 
     public void StopShop() {
+        print("StopShop");
+        // Animate arrow to Destroy it after it disappeared
+        arrow.GetComponent<Animator>().Play("ArrowDestroy");
         // Animation back up
-        if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp") && aniUI.GetCurrentAnimatorStateInfo(0).IsName("UIOutShop"))
+        if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp"))
         {
-            aniUI.Play("SwipeUIInShop");
             ani.Play("SwipeCamDownShop");
         }
     }

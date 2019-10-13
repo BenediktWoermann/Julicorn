@@ -66,7 +66,6 @@ public class Purchasing : MonoBehaviour
             GameObject.Find("GameManager").GetComponent<GameManagment>().StopShop();
             GameObject.Find("Player").GetComponent<SpriteRenderer>().sprite = sprites[skinNr];
             GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX = (skinNr == 1);
-            Debug.Log(skinNr);
         }
         else
         {
@@ -125,7 +124,7 @@ public class Purchasing : MonoBehaviour
         Vector3 pos = new Vector3
         {
             x = Screen.width * (skinNr + 1) / 4,
-            y = Screen.height / 5,
+            y = Screen.height / 4 + ShopSpawner.generalOffset,
             z = 0
         };
         buybtn.transform.position = Camera.main.ScreenToWorldPoint(pos);

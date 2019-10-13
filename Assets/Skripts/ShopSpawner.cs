@@ -7,9 +7,11 @@ public class ShopSpawner : MonoBehaviour
 {
     public Purchasing purch;
 
+    public GameObject arrowPrefab;
+
     public GameObject txtPrefab;
 
-    private float cloudOffset, priceOffset, generalOffset;
+    public static float cloudOffset, priceOffset, generalOffset;
     protected bool isHidden;
 
     public GameObject[] skinsPre;
@@ -27,7 +29,7 @@ public class ShopSpawner : MonoBehaviour
     {
         cloudOffset = -.6f;
         priceOffset = 1f;
-        generalOffset = -3f;
+        generalOffset = 0f;
         height = Camera.main.orthographicSize * 2f;
         print(height);
         width = height / Screen.height * Screen.width;
@@ -75,7 +77,7 @@ public class ShopSpawner : MonoBehaviour
             };
             pos = Camera.main.ScreenToWorldPoint(pos);
             pos.z = 0;
-            GameObject skin = Instantiate(skinsPre[i], pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
+            GameObject skin = Instantiate(skinsPre[i], pos, Quaternion.identity, GameObject.Find("Canvas").transform);
             skin.transform.localScale = can.referencePixelsPerUnit * skin.transform.localScale;
             skins.Add(skin);
             float skinHeight = 0;
@@ -85,12 +87,12 @@ public class ShopSpawner : MonoBehaviour
             }
             //spawn pricetags
             pos.y += skinHeight * priceOffset;
-            GameObject pricetag = Instantiate(txtPrefab, pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
+            GameObject pricetag = Instantiate(txtPrefab, pos, Quaternion.identity, GameObject.Find("Canvas").transform);
             pricetag.transform.localScale = can.referencePixelsPerUnit * pricetag.transform.localScale /100;
             pricetag.GetComponent<Text>().text = DataManagement.purchasedSkins[i] ? "purchased!" : "Buy for "+Purchasing.prices[i].ToString();
             //spawn clouds
             pos.y += skinHeight * cloudOffset;
-            GameObject cloud = Instantiate(cloudPre, pos, Quaternion.identity, GameObject.FindGameObjectWithTag("Canvas").transform);
+            GameObject cloud = Instantiate(cloudPre, pos, Quaternion.identity, GameObject.Find("Canvas").transform);
             cloud.transform.localScale = can.referencePixelsPerUnit * cloud.transform.localScale;
             clouds.Add(cloud);
             pricetags.Add(pricetag);
