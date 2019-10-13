@@ -1,12 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - Anima2D.Bone2D
     - Anima2D.EditorUpdaterProxy
-    - Anima2D.IkCCD2D
-    - Anima2D.IkLimb2D
-    - Anima2D.SpriteMesh
-    - Anima2D.SpriteMeshInstance
     - BG_Move
     - BG_Scaler
     - CoinRotater
@@ -33,8 +28,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -115,34 +112,22 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 10604}
     - Class: 114
-      Script: {instanceID: 10630}
-    - Class: 114
       Script: {instanceID: 10770}
     - Class: 114
       Script: {instanceID: 10826}
     - Class: 114
-      Script: {instanceID: 10932}
-    - Class: 114
       Script: {instanceID: 11042}
     - Class: 114
-      Script: {instanceID: 11130}
-    - Class: 114
       Script: {instanceID: 11394}
-    - Class: 114
-      Script: {instanceID: 11830}
     - Class: 114
       Script: {instanceID: 12022}
     - Class: 114
       Script: {instanceID: 12242}
     - Class: 114
       Script: {instanceID: 12720}
-    - Class: 114
-      Script: {instanceID: 12894}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
-      Script: {instanceID: 0}
-    - Class: 137
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -195,7 +180,7 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
-      Hash: 18c3e04b6b868b273be5d2c663bbaf61
+      Hash: 7a034bdb74b1aabc718f1362aa1cd3e8
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ShopSpawner
@@ -753,7 +738,7 @@ ScriptsOnlyBuild:
     className: ConvertToEntity
   - hash:
       serializedVersion: 2
-      Hash: 5a5d452c24084c57e755c177ea7cf4eb
+      Hash: 5dfc2f1e60718bcb6b251aa804b81ef2
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: GameManagment
