@@ -9,18 +9,19 @@ public class ObstacleMover : MonoBehaviour
     private bool falling;
     // gets set in TreeFall; is randomized
     private Quaternion rot;
-    private float angle, anglevel, angleacc, gravity;
+    private float angle, anglevel, angleacc, gra;
     private float startX;
     private float startY;
     private float lowerScreenBorder;
 
     //---------MOVEMENT----------
-    public float speed;
     private Vector3 pos;
+    public Vector2 speed;
+    public float grav;
     // Start is called before the first frame of update
     void Start()
     {
-        pos = GetComponent<Transform>().position;
+        pos = gameObject.transform.position;
         angle = 0;
         anglevel = 0;
         angleacc = 100f;
@@ -29,21 +30,14 @@ public class ObstacleMover : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame)
-        {
-            //if (GameObject.Find("Score").GetComponent<ScoreUpdater>().counting)
-            //{
-                pos.x -= speed * Time.deltaTime;
-            //}
-            GetComponent<Transform>().position = pos;
-        }
-
+        pos = gameObject.transform.position;
+        Move();
         // let tree fall frame for frame
         if (falling)
         {
             anglevel += angleacc * Time.deltaTime;
             angle += anglevel * Time.deltaTime;
-            angleacc = Mathf.Sin(angle / 180 * Mathf.PI) * gravity;
+            angleacc = Mathf.Sin(angle / 180 * Mathf.PI) * gra;
 
             //-------ROTATION--------
             GetComponent<Transform>().RotateAround(pos, new Vector3(0, 0, 1), -anglevel * Time.deltaTime);
@@ -59,6 +53,22 @@ public class ObstacleMover : MonoBehaviour
         }
     }
 
+    private void Move()
+    {
+        if (!GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame)
+        {
+            //horizontal
+            pos.x -= speed.x * Time.deltaTime;
+            GetComponent<Transform>().position = pos;
+
+            //vertical
+            speed.y += grav * Time.deltaTime;
+            pos.y -= speed.y * Time.deltaTime;
+            gameObject.transform.position = pos;
+        }
+
+    }
+
     public void SetPos(Vector3 v) {
         pos = v;
         GetComponent<Transform>().position = pos;
@@ -68,13 +78,14 @@ public class ObstacleMover : MonoBehaviour
         lowerScreenBorder = border;
     }
 
-    public void TreeFall(float grav = 300f, float startingacc = 100f) {
+    public void TreeFall(float gravity = 300f, float startingacc = 100f) {
         // Random fall time
-        gravity = grav;
+        gra = gravity;
         angleacc = startingacc;
         falling = true;
         startX = pos.x;
         startY = pos.y;
-        speed = 0;
+        speed.x = 0;
+        speed.y = 0;
     }
 }

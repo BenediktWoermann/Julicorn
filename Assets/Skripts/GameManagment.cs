@@ -80,7 +80,7 @@ public class GameManagment : MonoBehaviour
         }
         ClearWood();
         // Set check variables to false and reset player and score
-        GameObject.Find("Cloud").GetComponent<ObstacleMover>().speed = 0;
+        GameObject.Find("Cloud").GetComponent<ObstacleMover>().speed.x = 0;
         GameObject.Find("Cloud").GetComponent<ObstacleMover>().SetPos(new Vector3(-6.78f, -2.32f));
         GameObject.Find("Score").GetComponent<ScoreUpdater>().Reset();
         endingGame = false;

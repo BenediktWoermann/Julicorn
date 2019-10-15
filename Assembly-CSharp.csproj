@@ -104,7 +104,6 @@
     <Compile Include="Assets\Skripts\SceneChanger.cs" />
     <Compile Include="Assets\Skripts\ScoreUpdater.cs" />
     <Compile Include="Assets\Skripts\ShopSpawner.cs" />
-    <Compile Include="Assets\Skripts\SkinSpawner.cs" />
     <None Include="Assets\Anima2D\Examples\Shaders\VisibleInsideMask.shader" />
     <None Include="Assets\Anima2D\Examples\Shaders\VisibleOutsideMask.shader" />
     <None Include="Assets\Anima2D\Version.txt" />

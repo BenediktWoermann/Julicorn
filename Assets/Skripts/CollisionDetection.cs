@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CollisionDetection : MonoBehaviour
 {
+    public GameObject droppingCoinPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle" && (collision.gameObject.name == "Ground" || collision.gameObject.name == "Ceiling" || System.Math.Abs(collision.gameObject.GetComponent<ObstacleMover>().speed) > Mathf.Epsilon))
+        if (collision.gameObject.tag == "Obstacle" && (collision.gameObject.name == "Ground" || collision.gameObject.name == "Ceiling" || System.Math.Abs(collision.gameObject.GetComponent<ObstacleMover>().speed.x) > Mathf.Epsilon))
         {
             GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame = true;
             return;
@@ -28,6 +29,15 @@ public class CollisionDetection : MonoBehaviour
             DataManagement.coins++;
             GameObject.Find("GameManager").GetComponent<GameManagment>().WriteStats();
             Destroy(collision.gameObject);
+            if(GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX) {
+                DropCoin();
+            }
         }
+    }
+
+    private void DropCoin() {
+        Vector3 pos = droppingCoinPrefab.transform.position;
+        pos.y = GameObject.Find("Player").transform.position.y;
+        Instantiate(droppingCoinPrefab,pos,Quaternion.identity);   
     }
 }

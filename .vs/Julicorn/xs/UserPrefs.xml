@@ -1,14 +1,16 @@
 ﻿<Properties StartupConfiguration="{615E248D-9596-1207-D7B9-59A8746FCF17}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Skripts/GameManagment.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Skripts/CollisionDetection.cs">
     <Files>
-      <File FileName="Assets/Skripts/ShopSpawner.cs" Line="40" Column="6" />
-      <File FileName="Assets/Skripts/Purchasing.cs" />
+      <File FileName="Assets/Skripts/ShopSpawner.cs" Line="115" Column="50" />
+      <File FileName="Assets/Skripts/Purchasing.cs" Line="68" Column="13" />
       <File FileName="Assets/Skripts/DataManagement.cs" />
-      <File FileName="Assets/Skripts/GameManagment.cs" Line="98" Column="61" />
+      <File FileName="Assets/Skripts/GameManagment.cs" Line="92" Column="35" />
       <File FileName="Assets/Skripts/BG_Scaler.cs" />
-      <File FileName="Assets/Skripts/ObstacleSpawner.cs" />
-      <File FileName="Assets/Skripts/SkinSpawner.cs" />
-      <File FileName="Assets/Skripts/Save_Load.cs" Line="51" Column="43" />
+      <File FileName="Assets/Skripts/ObstacleSpawner.cs" Line="77" Column="1" />
+      <File FileName="Assets/Skripts/SkinSpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets/Skripts/Save_Load.cs" />
+      <File FileName="Assets/Skripts/CollisionDetection.cs" Line="41" Column="63" />
+      <File FileName="Assets/Skripts/ObstacleMover.cs" Line="38" Column="51" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -16,7 +18,7 @@
           <Node name="Julicorn" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Skripts" expanded="True">
-                <Node name="GameManagment.cs" selected="True" />
+                <Node name="CollisionDetection.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -26,7 +28,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="7b1c686c-1fa3-4c62-8692-7acdd404fbb2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="c085c3aa-0434-4516-8512-f5222def57b8" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

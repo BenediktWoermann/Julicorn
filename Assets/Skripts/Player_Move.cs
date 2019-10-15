@@ -50,12 +50,12 @@ public class Player_Move : MonoBehaviour
         GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().active = true;
         playerInitialized = true;
         GameObject.Find("Foreground").GetComponent<BG_Move>().speed = 0.08f;
-        GameObject.Find("Cloud").GetComponent<ObstacleMover>().speed = 3f;
+        GameObject.Find("Cloud").GetComponent<ObstacleMover>().speed.x = 3f;
         List<GameObject> toMove = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().tubes;
         for(int i = toMove.Count; i>0; i--) {
             if (toMove[i - 1] != null)
             {
-                toMove[i - 1].GetComponent<ObstacleMover>().speed = 2f;
+                toMove[i - 1].GetComponent<ObstacleMover>().speed.x = 2f;
             }
         }
     }

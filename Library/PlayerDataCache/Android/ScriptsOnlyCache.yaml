@@ -642,7 +642,7 @@ ScriptsOnlyBuild:
     className: AnimationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: afc5b93a7b192de2dcb3832fe35a5c7e
+      Hash: a47e17854ecb73ad30474aff271601d7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ObstacleMover
@@ -696,7 +696,7 @@ ScriptsOnlyBuild:
     className: ControlTrack
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 3b715f40caec2517bc38623cdeb2934a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CollisionDetection
@@ -1090,12 +1090,6 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: SignalEmitter
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: SkinSpawner
   - hash:
       serializedVersion: 2
       Hash: 59ce5902048c1041729c804e2772b2ce
