@@ -1926,6 +1926,10 @@ MonoBehaviour:
   - {fileID: 6997514840413932654, guid: 210315f21710f4b57b0f98a0c0a7eaf8, type: 3}
   - {fileID: 4290617117744524783, guid: b0140bc29fc27447989fc0125aa51a11, type: 3}
   - {fileID: 7088834696897697142, guid: ed5524b019a4a4315883066ce63e64f2, type: 3}
+  darkSkinsPre:
+  - {fileID: 0}
+  - {fileID: 4290617117744524783, guid: c77a00c2561b849b6ad911cd25c5f622, type: 3}
+  - {fileID: 7088834696897697142, guid: 809eb284a054f4c6ba9c4c6877c75825, type: 3}
   cloudPre: {fileID: 1182901270280166314, guid: 16995405922794792b131c6edc21e3ac,
     type: 3}
   clouds: []

@@ -15,6 +15,7 @@ public class ShopSpawner : MonoBehaviour
     protected bool isHidden;
 
     public GameObject[] skinsPre;
+    public GameObject[] darkSkinsPre;
     public GameObject cloudPre;
 
     // keep track of all Clouds and Skins in this list to destroy them later
@@ -50,15 +51,57 @@ public class ShopSpawner : MonoBehaviour
             Vector3 pos = skins[i].transform.position;
             pos.y = generalOffset + height*2;
             skins[i].transform.position = pos;
-       
+
             pos = clouds[i].transform.position;
             pos.y = generalOffset + cloudOffset * skinHeight + height*2;
             clouds[i].transform.position = pos;
-       
+
             pos = pricetags[i].transform.position;
             pos.y = generalOffset + priceOffset * skinHeight + height*2;
             pricetags[i].transform.position = pos;
         }
+    }
+
+    public void EnableSkin(int skinNr){
+        // destroy grey variant
+        GameObject toDestroy = skins[skinNr];
+        skins.RemoveAt(skinNr);
+        Destroy(toDestroy);
+
+        // spawn coloured variant
+        Vector3 pos = new Vector3
+        {
+            y = Screen.height * 2 + generalOffset,
+            x = Screen.width * (skinNr + 1) / (skinsPre.Length + 1)
+        };
+        pos = Camera.main.ScreenToWorldPoint(pos);
+        pos.z = 0;
+        GameObject skin;
+        skin = Instantiate(skinsPre[skinNr], pos, Quaternion.identity, GameObject.Find("Canvas").transform);
+        skins.Insert(skinNr,skin);
+
+        CanvasScaler can = GameObject.Find("Canvas").GetComponent<CanvasScaler>();
+        skin.transform.localScale = can.referencePixelsPerUnit * skin.transform.localScale;
+
+        // Set listener for new sprite
+        for(int i = 0; i<skins.Count; i++) {
+            purch.skinButtons[i] = skins[i].GetComponent<Button>();
+        }
+        purch.SetListeners();
+
+        // Change pricetag
+        float skinHeight = 0;
+        if (skins.Count > 0)
+        {
+            skinHeight = skins[0].GetComponent<Renderer>().bounds.extents.y * 2;
+        }
+        pos.y += skinHeight * priceOffset;
+        GameObject pricetag = Instantiate(txtPrefab, pos, Quaternion.identity, GameObject.Find("Canvas").transform);
+        pricetag.transform.localScale = can.referencePixelsPerUnit * pricetag.transform.localScale /100;
+        pricetag.GetComponent<Text>().text = "purchased!";
+        toDestroy = pricetags[skinNr];
+        pricetags[skinNr] = pricetag;
+        Destroy(toDestroy);
     }
 
     public void Spawn() {
@@ -77,9 +120,14 @@ public class ShopSpawner : MonoBehaviour
             };
             pos = Camera.main.ScreenToWorldPoint(pos);
             pos.z = 0;
-            GameObject skin = Instantiate(skinsPre[i], pos, Quaternion.identity, GameObject.Find("Canvas").transform);
-            skin.transform.localScale = can.referencePixelsPerUnit * skin.transform.localScale;
+            GameObject skin;
+            if(DataManagement.purchasedSkins[i]){
+                skin = Instantiate(skinsPre[i], pos, Quaternion.identity, GameObject.Find("Canvas").transform);
+            }else{
+                skin = Instantiate(darkSkinsPre[i], pos, Quaternion.identity, GameObject.Find("Canvas").transform);
+            }
             skins.Add(skin);
+            skin.transform.localScale = can.referencePixelsPerUnit * skin.transform.localScale;
             float skinHeight = 0;
             if (skins.Count > 0)
             {
@@ -112,7 +160,7 @@ public class ShopSpawner : MonoBehaviour
                 Destroy(skins[i - 1]);
             }
         }
-        for (int i = clouds.Count; i > 0; i--) { 
+        for (int i = clouds.Count; i > 0; i--) {
             if(clouds[i-1] != null) {
                 Destroy(clouds[i - 1]);
             }

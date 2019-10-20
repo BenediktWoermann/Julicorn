@@ -70,7 +70,7 @@ public class Purchasing : MonoBehaviour
         else
         {
             // Try to buy skin
-            if (DataManagement.coins > prices[skinNr])
+            if (DataManagement.coins >= prices[skinNr])
             {
                 // Buy Skin
                 DataManagement.coins -= prices[skinNr];
@@ -78,6 +78,7 @@ public class Purchasing : MonoBehaviour
                 DataManagement.purchasedSkins[skinNr] = true;
                 buybtn.GetComponentInChildren<Text>().text = "select";
                 Save_Load.SaveData();
+                GameObject.Find("ShopSpawner").GetComponent<ShopSpawner>().EnableSkin(skinNr);
             }
             else
             {
@@ -131,5 +132,5 @@ public class Purchasing : MonoBehaviour
         pos = buybtn.GetComponent<RectTransform>().localPosition;
         pos.z = 0;
         buybtn.GetComponent<RectTransform>().localPosition = pos;
-    } 
+    }
 }
