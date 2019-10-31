@@ -12,7 +12,7 @@ public class GameManagment : MonoBehaviour
     public Text coinsTxt;
     public Button startGame, shop;
     public int endingDuration = 50;
-    public bool endingGame, ended;
+    public bool endingGame, ended, goldiEvent, goldiAniStarted, goldiAniFinished;
     private int frames;
     private float playerGravityScale;
     private float ShopDespawnTimer;
@@ -52,9 +52,6 @@ public class GameManagment : MonoBehaviour
         // if arrowDestroy animation ended, destroy arrow
         if(arrow && arrow.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("ArrowEnd")) {
             Destroy(arrow);
-        }
-        if (ShopDespawn) { 
-        
         }
         if (endingGame)
         {
@@ -102,7 +99,7 @@ public class GameManagment : MonoBehaviour
     public void StopGame()
     {
         // Do animation after waiting endingDuration
-        if (!ended && frames >= endingDuration)
+        if (!ended && frames >= endingDuration && !goldiEvent)
         {
             if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamDown"))
             {
@@ -111,9 +108,36 @@ public class GameManagment : MonoBehaviour
             ended = true;
         }
 
+        // Goldi animation
+
+        if(!ended && frames >= endingDuration && goldiEvent && !goldiAniStarted && !goldiAniFinished) {
+            GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().StartGoldiAnimation();
+            goldiAniStarted = true;
+        }
+
+        if (!ended && frames >= endingDuration && goldiEvent && goldiAniStarted && !goldiAniFinished) {
+            if (GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().StepGoldiAnimation()) {
+                GameObject player = GameObject.Find("Player");
+                player.GetComponent<Player_Move>().playerInitialized = false;
+                player.GetComponent<Player_Move>().gameStoped = false;
+                Player_Move.firstGoldiGame = true;
+                player.GetComponent<Player_Move>().jumpable = true;
+                Player_Move.goldiEvent = false;
+                endingGame = false;
+                goldiAniStarted = false;
+                goldiAniFinished = true;
+                goldiEvent = false;
+                frames = 0;
+                return;
+            }
+        }
+
+        // end Goldi animation
+
         // Stop the Game in the first frame after collision
         if (frames == 0)
         {
+            print("Stop game");
             List<GameObject> giveBorder = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().tubes;
             for(int i = giveBorder.Count; i>0; i--) {
                 if (giveBorder[i - 1] != null)

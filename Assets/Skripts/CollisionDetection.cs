@@ -20,7 +20,7 @@ public class CollisionDetection : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Obstacle" && (collision.gameObject.name == "Ground" || collision.gameObject.name == "Ceiling" || System.Math.Abs(collision.gameObject.GetComponent<ObstacleMover>().speed.x) > Mathf.Epsilon))
+        if (!Player_Move.goldiEvent && collision.gameObject.tag == "Obstacle" && (collision.gameObject.name == "Ground" || collision.gameObject.name == "Ceiling" || System.Math.Abs(collision.gameObject.GetComponent<ObstacleMover>().speed.x) > Mathf.Epsilon))
         {
             GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame = true;
             return;
@@ -32,6 +32,9 @@ public class CollisionDetection : MonoBehaviour
             if(GameObject.Find("Player").GetComponent<SpriteRenderer>().flipX) {
                 DropCoin();
             }
+        }
+        if (Player_Move.goldiEvent && !ObstacleSpawner.eventDone) {
+            GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().GoldiEvent();
         }
     }
 

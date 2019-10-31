@@ -14,7 +14,7 @@ public class MainButton : MonoBehaviour
         b = GameObject.Find("MainButton").GetComponent<Button>();
         GO = GameObject.Find("GoldDonkey");
         PM = GO.GetComponent<Player_Move>();
-        b.onClick.AddListener(PM.Jump);
+        b.onClick.AddListener(() => PM.Jump());
         b.onClick.AddListener(Test);
     }
 

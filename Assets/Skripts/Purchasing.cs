@@ -19,7 +19,7 @@ public class Purchasing : MonoBehaviour
     private void Start()
     {
         buybtn.onClick.AddListener(() => { PurchaseSkin(selectedSkin);});
-        prices = new int[]{0, 200, 1000};
+        prices = new int[]{0, 200, 1000, 99999};
     }
 
     private void Update()
@@ -102,8 +102,11 @@ public class Purchasing : MonoBehaviour
     public void SetListeners() {
         for (int i = 0; i < skinButtons.Count; i++)
         {
-            int a = i;
-            skinButtons[i].onClick.AddListener(() => { SkinClicked(a); });
+            if (skinButtons[i] != null)
+            {
+                int a = i;
+                skinButtons[i].onClick.AddListener(() => { SkinClicked(a); });
+            }
         }
     }
 
@@ -116,15 +119,15 @@ public class Purchasing : MonoBehaviour
         }
         else
         {
-            // write "purchasing" on button
-            buybtn.GetComponentInChildren<Text>().text = "purchase";
+            // write the price on button
+            buybtn.GetComponentInChildren<Text>().text = prices[skinNr].ToString() + " Coins";
             selectedSkin = skinNr;
         }
         // position the button
         Camera cam = GameObject.Find("Main Camera").GetComponent<Camera>();
         Vector3 pos = new Vector3
         {
-            x = Screen.width * (skinNr + 1) / 4,
+            x = Screen.width * (skinNr + 1) / (DataManagement.purchasedSkins.Length+1),
             y = Screen.height / 4 + ShopSpawner.generalOffset,
             z = 0
         };

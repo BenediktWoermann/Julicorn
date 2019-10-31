@@ -21,6 +21,7 @@ public class LoadAtStart : MonoBehaviour
         DataManagement.highscore = read.highscore;
         highscore.text = DataManagement.highscore.ToString();
         coins.text = DataManagement.coins.ToString();
+        ObstacleSpawner.eventDone = DataManagement.purchasedSkins[3];
     }
 
 

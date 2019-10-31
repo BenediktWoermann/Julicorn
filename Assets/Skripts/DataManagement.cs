@@ -9,7 +9,7 @@ public class DataManagement
 {
     public static int coins;
     public static int highscore;
-    public static bool[] purchasedSkins = new bool[3];
+    public static bool[] purchasedSkins = new bool[Info.skinCount];
 
     //public DataManagement() {
         //coins = GameObject.Find("GameManager").GetComponent<GameManagment>().coins;

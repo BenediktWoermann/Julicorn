@@ -4,6 +4,6 @@ using UnityEngine;
 
 public static class Info
 {
-    public static int skinCount = 3;
+    public static int skinCount = 4;
 
 }

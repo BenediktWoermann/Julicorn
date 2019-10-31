@@ -49,9 +49,13 @@ public static class Save_Load
             }
             //starter skin is always purchased
             data.purchasedSkins[0] = true;
+
+            // GOD MODE
             data.purchasedSkins[1] = false;
             data.purchasedSkins[2] = false;
+            data.purchasedSkins[3] = true;
             data.coins = 9999;
+
             //Debug.Log("After Load:    Coins: " + DataManagement.coins + "     Highscore: " + DataManagement.highscore);
             return data;
         }

@@ -55,7 +55,7 @@ public class ObstacleMover : MonoBehaviour
 
     private void Move()
     {
-        if (!GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame)
+        if (!GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame || GameObject.Find("GameManager").GetComponent<GameManagment>().goldiAniStarted)
         {
             //horizontal
             pos.x -= speed.x * Time.deltaTime;
