@@ -40,7 +40,6 @@ public class GameManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Save_Load.SaveData();
         // check if canvas is up in the shop, if so spawn arrow if not spawned already
         if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp") && !arrow)
         {
