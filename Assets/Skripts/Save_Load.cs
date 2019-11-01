@@ -53,7 +53,7 @@ public static class Save_Load
             // GOD MODE
             //data.purchasedSkins[1] = false;
             //data.purchasedSkins[2] = false;
-            //data.purchasedSkins[3] = true;
+            //data.purchasedSkins[3] = false;
             //data.coins = 9999;
 
             //Debug.Log("After Load:    Coins: " + DataManagement.coins + "     Highscore: " + DataManagement.highscore);

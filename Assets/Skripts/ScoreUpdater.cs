@@ -7,6 +7,7 @@ public class ScoreUpdater : MonoBehaviour
 {
     public bool counting;
     public static int frames;
+    public static float score;
     public Text txt;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +22,8 @@ public class ScoreUpdater : MonoBehaviour
         if (counting && !GameObject.Find("GameManager").GetComponent<GameManagment>().endingGame)
         {
             frames++;
-            txt.text = (frames / 10).ToString();
+            score += Time.deltaTime*4;
+            txt.text = ((int)score).ToString();
         }
     }
 
@@ -29,6 +31,7 @@ public class ScoreUpdater : MonoBehaviour
     {
         txt.text = "0";
         frames = 0;
+        score = 0f;
     }
 
     public int GetScore() {

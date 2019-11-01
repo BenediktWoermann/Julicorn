@@ -40,6 +40,7 @@ public class GameManagment : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Save_Load.SaveData();
         // check if canvas is up in the shop, if so spawn arrow if not spawned already
         if (ani.GetCurrentAnimatorStateInfo(0).IsName("CamUp") && !arrow)
         {
@@ -137,7 +138,6 @@ public class GameManagment : MonoBehaviour
         // Stop the Game in the first frame after collision
         if (frames == 0)
         {
-            print("Stop game");
             List<GameObject> giveBorder = GameObject.Find("ObstacleSpawner").GetComponent<ObstacleSpawner>().tubes;
             for(int i = giveBorder.Count; i>0; i--) {
                 if (giveBorder[i - 1] != null)

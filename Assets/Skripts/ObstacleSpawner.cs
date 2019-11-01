@@ -38,7 +38,7 @@ public class ObstacleSpawner : MonoBehaviour
 
         if (active)
         {
-            if (ScoreUpdater.frames > 5000 && !eventDone) {
+            if (ScoreUpdater.score > 100 && !eventDone) {
                 // start GoldiEvent
                 Player_Move.goldiEvent = true;
             }
@@ -163,6 +163,7 @@ public class ObstacleSpawner : MonoBehaviour
             GameObject.Find("Player").GetComponent<Player_Move>().gameStoped = false;
             GameObject.Find("Player").transform.position = new Vector3(-6.7f, -1.96f, 0);
             player.GetComponent<SpriteRenderer>().sprite = goldiSprite;
+            player.GetComponent<SpriteRenderer>().flipX = false;
             Player_Move.goldiEvent = false;
             eventDone = true;
             DataManagement.purchasedSkins[3] = true;
